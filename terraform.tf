@@ -7,25 +7,25 @@ terraform {
     }
 
     http = {
-      source = "hashicorp/http"
-      version = "~> 2.0"
+      source  = "hashicorp/http"
+      version = "~> 2.2.0"
     }
 
     random = {
-      source = "hashicorp/random"
+      source  = "hashicorp/random"
       version = "~> 3.0"
     }
 
     local = {
-      source = "hashicorp/local"
-      version = "~> 2.0"
+      source  = "hashicorp/local"
+      version = "~> 2.4.0"
     }
 
     # TLS provider to help generate SSH keys
 
     tls = {
-      source = "hashicorp/tls"
-      version = "~>3.1"
+      source  = "hashicorp/tls"
+      version = "~> 3.4.0"
     }
   }
 }
