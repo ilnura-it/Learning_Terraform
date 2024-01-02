@@ -1,3 +1,4 @@
+#Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
 }
@@ -71,7 +72,7 @@ resource "aws_route_table" "private_route_table" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id     = aws_internet_gateway.internet_gateway.id
+    gateway_id = aws_internet_gateway.internet_gateway.id
     # nat_gateway_id = aws_nat_gateway.nat_gateway.id
   }
   tags = {
@@ -123,6 +124,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   }
 }
 
+#Create S3 Bucket
 resource "aws_s3_bucket" "my_s3_bucket" {
   # bucket = "unique-tf-test-bucket-${random_id.randomness.hex}"
   bucket = "unique-tf-test-bucket-${random_id.randomness.hex}"
@@ -135,9 +137,9 @@ resource "aws_s3_bucket" "my_s3_bucket" {
     App     = local.application
 
   }
-
 }
 
+# Create Bucket's ACL
 resource "aws_s3_bucket_acl" "my_s3_bucket_acl" {
   bucket = "aws_s3_bucket.my_s3_bucket"
   acl    = "private"
