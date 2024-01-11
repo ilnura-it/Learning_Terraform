@@ -235,20 +235,22 @@ resource "aws_security_group" "vpc-ping" {
 }
 
 resource "aws_instance" "ubuntu_server" {
-  ami           = "ami-007855ac798b5175e"
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public_subnets["public_subnet_1"].id
+  ami             = "ami-007855ac798b5175e"
+  instance_type   = "t2.micro"
+  subnet_id       = aws_subnet.public_subnets["public_subnet_1"].id
   security_groups = [aws_security_group.vpc-ping.id,
   aws_security_group.ingress-ssh.id, aws_security_group.vpc-web.id]
   associate_public_ip_address = true
   key_name                    = aws_key_pair.generated.key_name
   connection {
-    user        = "ubuntu"
-    private_key = tls_private_key.generated.private_key_pem
-    host        = self.public_ip
+    user          = "ubuntu"
+    private_key   = tls_private_key.generated.private_key_pem
+    host          = self.public_ip
   }
   tags = {
-    Name = "Ubuntu EC2 Server"
+    Name  = local.server_name
+    Owner = local.team
+    App   = local.application
   }
   lifecycle {
     ignore_changes = [security_groups]

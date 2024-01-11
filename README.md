@@ -56,5 +56,51 @@
                 shared_credential_file = "/user/aws/.aws/creds
             }
 
--changes
-changes
+## Terraform Output block
+- To get the output:
+
+            terraform output
+
+- To get the output in JSON format:
+
+            terraform output -json
+
+
+## Commenting in Terraform
+
+            #
+
+            //
+            
+            /*    */
+
+## Using multiple providers
+
+- To see all installed providers
+
+            terrform version
+
+- To initialize the providers plugins
+
+            terrform init
+            terrfarom init -upgrade
+
+## Terraform provisioners
+
+Provisioners can be used to model specific actions on the local machine or on a remote machine in order to prepare servers or other infrastructure objects for service.
+
+            provisioner "local-exec" {
+            command = "chmod 400 ${local_file.private_key_pem.filename}"
+            }
+
+            provisioner "remote-exec" {
+              inline = [
+                "sudo rm -rf /tmp",
+                "sudo git clone https://github.com/hashicorp/demo-terraform-101 /tmp",
+                "sudo sh /tmp/assets/setup-web.sh",
+              ]
+            }
+
+- Showcase state of an instance we created
+
+            terraform state show aws_instance.ubuntu_server
