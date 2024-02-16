@@ -202,12 +202,15 @@ You can set TF_LOG to one of the log levels TRACE, DEBUG, INFO, WARN or ERROR to
 ### : Enable Logging 
 
 - Linux
+
 ```export TF_LOG=TRACE```
 
 - PowerShell
+
 ```$env:TF_LOG="TRACE"```
 
 Run Terraform Apply
+
 ```terraform apply```
 
 ### Enable Logging Path
@@ -215,58 +218,67 @@ Run Terraform Apply
 To persist logged output you can set TF_LOG_PATH in order to force the log to always be appended to a specific file when logging is enabled. Note that even when TF_LOG_PATH is set, TF_LOG must be set in order for any logging to be enabled.
 
 - Linux
-```export TF_LOG_PATH="terraform_log.txt"```
+      
+            export TF_LOG_PATH="terraform_log.txt"
 
 - PowerShell
-```$env:TF_LOG_PATH="terraform_log.txt"```
+
+            $env:TF_LOG_PATH="terraform_log.txt"
 
 - Run terraform init to see the initialization debugging information.
-```terraform init -upgrade```
+
+            terraform init -upgrade
 
 ### Disable Logging
 
 Terraform logging can be disabled by clearing the appropriate environment variable.
 
 - Linux
-```export TF_LOG=""```
+
+            export TF_LOG=""
 
 - PowerShell
-```$env:TF_LOG=""```
+
+            $env:TF_LOG=""
 
 ### Implement and Maintain State
 
 Terraform State Locking
 
-```terraform apply -lock-timeout=60s```
+      terraform apply -lock-timeout=60s
 
 Install the latest module and provider versions allowed within configured constraints, overriding the default behavior of selecting exactly the version recorded in the dependency lockfile.
-```terraform init -upgrade```
+      
+      terraform init -upgrade
 
 Reconfigure a backend, ignoring any saved configuration.
-```terraform init  -reconfigure```
+      
+      terraform init  -reconfigure
 
 Reconfigure a backend, and attempt to migrate any existing state (local, remote, s3).
-```terraform init -migrate-state```
+
+      terraform init -migrate-state
 
 ### Terraform Cloud
 
-```terraform login```
+      terraform login
 
 ### Terraform State Refresh
 
 Run a terraform refresh command to update Terraform state
-```terraform refresh```
+      
+      terraform refresh
 
 Automatically applying the effect of a refresh is risky, because if you have misconfigured credentials for one or more providers then the provider may be misled into thinking that all of the managed objects have been deleted, and thus remove all of the tracked objects without any confirmation prompt. This is is why the terraform refresh command has been deprecated. 
 Instead it is recommended to use the ```-refresh-only``` option to get the same effect as a terraform refresh but with the opportunity to review the the changes that Terraform has detected before committing them to the state.
  
-      ```terraform plan -refresh-only```
-      ```terraform apply -refresh-only```
+      terraform plan -refresh-only
+      terraform apply -refresh-only
 
 Will update terraform state file.
 
 ### Terraform Backend Configuration
 
-      ```tf init -backend-config=path -migrate-state```   
+      tf init -backend-config=path -migrate-state   
 
 Configuration to be merged with what is in the configuration file's 'backend' block. This can be either a path to an HCL file with key/value assignments (same format as terraform.tfvars) or a 'key=value' format, and can be specified multiple times. The backend type must be in the configuration itself.
