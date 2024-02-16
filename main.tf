@@ -267,7 +267,7 @@ resource "aws_instance" "ubuntu_server" {
       "sudo sh /tmp/assets/setup-web.sh",
     ]
   }
-
+  
 }
 
 
